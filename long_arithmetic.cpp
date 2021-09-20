@@ -4,8 +4,6 @@ using namespace std;
 
 typedef long long int ll;
 
-
-
 struct long_arif {
     vector<int> a;
     bool znak = false;
@@ -141,7 +139,7 @@ struct long_arif {
 
 // a / b and a > b
 int division(long_arif a, long_arif b){
-    int l = 0, r = 1001;
+    int l = 0, r = 100001;
     while(l + 1 < r){
         int m = (l + r) / 2;
         
@@ -156,6 +154,27 @@ int division(long_arif a, long_arif b){
     return l;
 }
 
+
+long_arif division_2(long_arif a, long_arif b){
+    long_arif d;
+    long_arif ans;
+    long_arif c;
+
+    d.init("0");
+    ans.init("0");
+    c.init("1");
+    
+    while(d.complong(a) > 0){
+        ans.add(c);
+        d.add(b);
+    }
+
+    if(d.complong(a) == -1)
+        ans.substruct(c);
+
+    return ans;
+}
+
 int main() {
     string s1, s2;
     cin >> s1 >> s2;
@@ -163,5 +182,8 @@ int main() {
     a.init(s1);
     b.init(s2);
     cout << division(a, b) << endl;
+    
+    long_arif c = division_2(a, b);
+    c.write();
     return 0;
 }
